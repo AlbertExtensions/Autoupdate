@@ -1,19 +1,22 @@
 """Auto update all albert extensions"""
 import os
 
-from albertv0 import *
+from albert import *
 
-__iid__ = "PythonInterface/v0.1"
+__iid__ = "PythonInterface/v0.4"
+__title__ = "Autoupdate"
 __prettyname__ = "Autoupdate"
-__version__ = "0.1"
-__trigger__ = "up "
-__author__ = "Bharat Kalluri"
+__version__ = "0.4.1"
+__triggers__ = "up "
+__authors__ = "Bharat Kalluri"
 __dependencies__ = []
 
 
 def auto_update():
-    os.system("""cd ~/.local/share/albert/org.albert.extension.python/modules && 
-    find . -maxdepth 1 -type d \\( ! -name . \\) -exec bash -c "cd '{}' && pwd && git pull --all" \\;""")
+    os.system(
+        """cd ~/.local/share/albert/org.albert.extension.python/modules && 
+    find . -maxdepth 1 -type d \\( ! -name . \\) -exec bash -c "cd '{}' && pwd && git pull --all" \\;"""
+    )
 
 
 def handleQuery(query):
@@ -22,6 +25,5 @@ def handleQuery(query):
             id=__prettyname__,
             text="All extensions will be updated on enter",
             subtext="It will take some time, wait till albert disappears. Check the logs for info.",
-            actions=[FuncAction(text="Save token",
-                                callable=lambda: auto_update())]
+            actions=[FuncAction(text="Save token", callable=lambda: auto_update())],
         )
